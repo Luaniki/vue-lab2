@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueLab</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <section class="container">
+      <section class="row">
+        <section class="col-md-8 mt-4">
+          <ul class="list-group">
+            <li
+            *ngFor="let person of personArray"
+             class="list-group-item list-group-item-action"
+             (click)="openForEdit(person)"
+             [class.active]="person == selectedPerson"
+             >
+            <span class="badge bg-info">{{ person.id }}</span> {{ person.name }} {{ person.surname }} - {{ person.age }} años - C.C. {{ person.ced }}
+            <br>
+            <span id="resultado"></span>
+            </li>
+          </ul>
+          <article class="card mt-4">
+            <article class="card-body">
+              <article class="card-title">
+                Agrega una nueva persona
+              </article>
+              <br>
+              <article class="form-group">
+                <input type="text" [(ngModel)]="selectedPerson.name" placeholder="Inserta un nombre" class="form-control">
+              </article>
+              <br>
+              <article class="form-group">
+                <input type="text" [(ngModel)]="selectedPerson.surname" placeholder="Inserta un apellido" class="form-control">
+              </article>
+              <br>
+              <article class="form-group">
+                <input type="text" [(ngModel)]="selectedPerson.age" placeholder="Inserta una edad" class="form-control">
+              </article>
+              <br>
+              <article class="form-group">
+                <input type="text" [(ngModel)]="selectedPerson.ced" placeholder="Inserta una cédula" class="form-control">
+              </article>
+              <br>
+              <button (click)="addOrEdit()" class="btn btn-success">
+                Agregar
+              </button>
+              <button
+              *ngIf="selectedPerson.id !== 0"
+              class="btn btn-danger"
+              (click)="delete()">
+                Eliminar
+              </button>
+            </article>
+          </article>
+        </section>
+        <section class="col-md-4">
+          <img width="300" src="./src/assets/Logo Vue.png" alt="Logo Vue">
+          <p class="container bg-info">Personas mayores de edad: {{ contarMay() }}</p>
+          <p class="container bg-info">Personas menores de edad: {{ contarMen() }}</p>
+        </section>
+      </section>
+    </section>
+    
+  </body>
+</html>
